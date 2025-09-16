@@ -1,6 +1,6 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-
+import jwt from "jsonwebtoken";
 const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // ---------------------------
@@ -19,6 +19,8 @@ export interface IUser extends Document {
   isVerified: boolean;
   courses: Array<{ courseId: mongoose.Types.ObjectId }>;
   comparePassword: (password: string) => Promise<boolean>;
+  SignAccessToken: () => string,
+  SignRefreshToken: () => string
 }
 
 // ---------------------------
@@ -41,16 +43,17 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "Please enter your password"],
-      minlength: [6, "Password should be at least 6 characters"],
-      select: false, // never return password by default
+      minlength: [4, "Password should be at least 6 characters"],
+      select: false
     },
     avatar: {
       public_id: { type: String, default: "" },
-      url: { type: String, default: "" },
+      url: { type: String, default: "" }
     },
     role: {
-      type: String
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
     },
     isVerified: {
       type: Boolean,
@@ -78,6 +81,26 @@ userSchema.pre<IUser>("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
+
+// ---------------------------
+// Sign Access token
+// ---------------------------
+userSchema.methods.SignAccessToken = function () {
+  return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || "", {
+    expiresIn: "5m"
+  })
+}
+
+
+// ---------------------------
+// Sign Refresh token
+// ---------------------------
+userSchema.methods.SignRefreshToken = function () {
+  return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || "", {
+    expiresIn: "3d"
+  })
+}
+// ---------------------------------------------------------------------------------------------- 2:51
 
 // ---------------------------
 // Compare Password Method
