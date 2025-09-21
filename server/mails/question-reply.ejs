@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Reply Notification</title>
+</head>
+<body style="margin:0; padding:0; font-family: Arial, Helvetica, sans-serif; background-color:#f4f4f4;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4; padding:20px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); padding:20px;">
+          <!-- Header -->
+          <tr>
+            <td style="text-align:center; padding-bottom:20px;">
+              <h1 style="margin:0; font-size:24px; color:#1e40af;">Hello <%= data.name %>,</h1>
+            </td>
+          </tr>
+
+          <!-- Message -->
+          <tr>
+            <td style="padding-bottom:15px;">
+              <p style="font-size:16px; color:#333; margin:0;">
+                Your question titled <strong style="color:#1e40af;">"<%= data.title %>"</strong> has received a new answer:
+              </p>
+            </td>
+          </tr>
+
+          <!-- Answer Block -->
+          <tr>
+            <td style="padding:15px; background:#f9fafb; border-left:4px solid #1e40af; border-radius:4px; margin:15px 0;">
+              <p style="margin:0; font-size:15px; color:#111;"><%= data.answer %></p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding-top:20px; text-align:center;">
+              <p style="font-size:14px; color:#555; margin:0;">
+                Thank you for being a part of our community! 🚀
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

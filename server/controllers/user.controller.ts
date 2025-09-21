@@ -10,6 +10,8 @@ import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt
 import { getRedis } from "../utils/redis";
 import { getUserById } from "../services/user.services";
 import cloudinary from "cloudinary";
+import mongoose from "mongoose";
+import CourseModel from "../models/course.models";
 
 // ---------------------------
 // JWT Activation Token Type
@@ -339,7 +341,6 @@ export const updateProfilePicture = CatchAsyncError(
             success: true,
             message: "Profile picture updated successfully",
             avatar: user.avatar,
-            
         });
     }
 );

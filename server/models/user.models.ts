@@ -11,7 +11,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  avatar: {
+  avatar: { 
     public_id: string;
     url: string;
   };
@@ -87,7 +87,7 @@ userSchema.pre<IUser>("save", async function (next) {
 // ---------------------------
 userSchema.methods.SignAccessToken = function () {
   return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || "", {
-    expiresIn: "20m"
+    expiresIn: "1d"
   })
 }
 
