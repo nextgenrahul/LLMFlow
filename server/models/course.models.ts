@@ -85,6 +85,7 @@ const courseDataSchema = new Schema<ICourseData>({
 
 const courseSchema = new Schema<ICourse>(
     {
+        
         name: {
             type: String, required: true, unique: true
         },

@@ -6,7 +6,8 @@ import ErrorMiddleware from "./middlewares/error";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route";
 import courseRouter from "./routes/course.route";
-
+import orderRouter from "./routes/order.route";
+import notificationRouter from "./routes/notification.route";
 dotenv.config();
 
 export const app = express();
@@ -25,6 +26,7 @@ app.use(cors({
 // Routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/courses', courseRouter);
+app.use('/api/v1/orders', orderRouter);
+app.use('/api/v1/notifications', notificationRouter);
 
-
-app.use(ErrorMiddleware)
+app.use(ErrorMiddleware);

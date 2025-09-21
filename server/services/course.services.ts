@@ -8,3 +8,11 @@ export const createCourse = CatchAsyncError(async (data: any, res: Response, nex
     const course = await CourseModel.create(data);
     return res.status(201).json({ success: true, message: "Course created successfully", course });
 });
+
+export const getAllCoursesServices = async(res: Response) => {
+    const courses = await CourseModel.find().sort({createdAt: -1});
+    res.status(201).json({
+        success: true,
+        courses
+    });
+}

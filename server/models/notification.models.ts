@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema , Model}  from "mongoose";
+import mongoose, { Document, Schema, Model } from "mongoose";
 
 export interface INotification extends Document {
     title: string;
@@ -18,8 +18,8 @@ const notificationSchema = new Schema<INotification>({
     },
     status: {
         type: String,
-        enum: ["sent", "delivered", "read"],
-        default: "sent"
+        enum: ["unread", "sent", "delivered", "read"],
+        default: "unread"
     },
     title: {
         type: String,

@@ -26,7 +26,7 @@ export const isAuthenticated = CatchAsyncError(async (req: Request, res: Respons
 
     req.user = user;
     next();
-});
+}); 
 
 export const authorizeRoles = (...roles: string[]) => {
     return (req: Request, res: Response, next: NextFunction) => {

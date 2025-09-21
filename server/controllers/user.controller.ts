@@ -8,10 +8,11 @@ import path from "path";
 import sendMail from "../utils/sendMail";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 import { getRedis } from "../utils/redis";
-import { getUserById } from "../services/user.services";
+import { getUserById, getAllUsersServices } from "../services/user.services";
 import cloudinary from "cloudinary";
 import mongoose from "mongoose";
 import CourseModel from "../models/course.models";
+import { getAllOrdersServices } from "../services/order.serviecs";
 
 // ---------------------------
 // JWT Activation Token Type
@@ -344,3 +345,14 @@ export const updateProfilePicture = CatchAsyncError(
         });
     }
 );
+
+
+
+
+export const getAllUsers = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        getAllUsersServices(res);
+    } catch (error) {
+        return next(new ErrorHandler("Failed to fetch orders", 500));
+    }
+});
